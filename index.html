@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital GM</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- GAME SELECT -->
+        <section id="gameSelectScreen" class="screen">
+            <h1>Digital GM</h1>
+
+            <button id="newGameButton">
+                NEW GAME
+            </button>
+        </section>
+
+
+        <!-- SETTING -->
+        <section id="settingScreen" class="screen hidden">
+            <h1>GAME SETTING</h1>
+
+            <p>ゲーム設定画面</p>
+
+            <button id="toPreparingButton">
+                NEXT
+            </button>
+        </section>
+
+
+        <!-- PREPARING -->
+        <section id="preparingScreen" class="screen hidden">
+            <h1>PREPARING</h1>
+
+            <p>ゲーム開始前確認</p>
+
+            <button id="gameStartButton">
+                GAME START
+            </button>
+        </section>
+
+
+        <!-- ROUND -->
+        <section id="roundScreen" class="screen hidden">
+            <h1>GAME</h1>
+
+            <p id="gameStateText">
+                GAME START
+            </p>
+
+            <button id="gameEndButton">
+                GAME END
+            </button>
+        </section>
+
+
+        <!-- GAME END -->
+        <section id="gameEndScreen" class="screen hidden">
+            <h1>GAME END</h1>
+
+            <button id="returnButton">
+                RETURN
+            </button>
+        </section>
+
+    </div>
+
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>
