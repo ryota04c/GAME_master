@@ -1,1 +1,59 @@
+* {
+    box-sizing: border-box;
+}
 
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #111;
+    color: white;
+    font-family: sans-serif;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+/* 各画面 */
+.screen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+}
+
+/* 非表示 */
+.hidden {
+    display: none;
+}
+
+/* 見出し */
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+/* ボタン */
+button {
+    padding: 15px 40px;
+
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
