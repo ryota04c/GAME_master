@@ -12,6 +12,8 @@ const screens = {
     round: document.getElementById("roundScreen"),
     gameEnd: document.getElementById("gameEndScreen")
 };
+const playerCount = document.getElementById("playerCount");
+const playerInputs = document.querySelectorAll(".playerInput");
 
 
 // ====================
