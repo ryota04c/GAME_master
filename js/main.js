@@ -36,19 +36,55 @@ function showScreen(screen) {
 
 document.getElementById("newGameButton").onclick = () => {
 
-    // 4人でゲームを初期化
-    gameCore.initialize(4);
+    gameCore.initialize(
+        Number(playerCount.value)
+    );
 
-    // 設定画面へ
+    updatePlayerInputs();
+
     showScreen(screens.setting);
 };
 
+function updatePlayerInputs() {
+
+    const count = Number(playerCount.value);
+
+    playerInputs.forEach((element, index) => {
+
+        if (index < count) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+
+    });
+}
+
+playerCount.onchange = () => {
+
+    updatePlayerInputs();
+
+};
 
 // ====================
 // SETTING → PREPARING
 // ====================
 
 document.getElementById("toPreparingButton").onclick = () => {
+
+    const players = gameCore.getState().players;
+
+    players.forEach((player, index) => {
+
+        const input = document.getElementById(
+            `playerName${index + 1}`
+        );
+
+        player.name = input.value;
+
+    });
+
+    console.log(gameCore.getState());
 
     showScreen(screens.preparing);
 };
