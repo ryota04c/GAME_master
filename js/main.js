@@ -185,7 +185,7 @@ document.getElementById("returnButton").onclick = () => {
 //ドラッグ処理
     let draggedPlayer = null;
     let draggedElement = null;
-    
+    let draggedStartSeat = null;
     
     // ====================
     // ドラッグ開始
@@ -200,20 +200,22 @@ document.getElementById("returnButton").onclick = () => {
             return;
         }
     
-    
         draggedPlayer =
             seat.dataset.playerId;
     
         draggedElement = seat;
     
+        // ドラッグ開始時の座席を保存
+        const player =
+            gameCore.getState().players.find(
+                p => p.id === draggedPlayer
+            );
     
-        // ドラッグ中の見た目
+        draggedStartSeat = player.seat;
+    
         seat.classList.add("dragging");
     
-    
-        // タッチ操作で画面がスクロールしないようにする
         seat.setPointerCapture(event.pointerId);
-    
     });
     
     
@@ -227,10 +229,8 @@ document.getElementById("returnButton").onclick = () => {
             return;
         }
     
-    
         const rect =
             seatBoard.getBoundingClientRect();
-    
     
         const x =
             event.clientX - rect.left;
@@ -238,13 +238,11 @@ document.getElementById("returnButton").onclick = () => {
         const y =
             event.clientY - rect.top;
     
-    
         draggedElement.style.left =
             `${x}px`;
     
         draggedElement.style.top =
             `${y}px`;
-    
     });
     
     
@@ -258,24 +256,110 @@ document.getElementById("returnButton").onclick = () => {
             return;
         }
     
+        const rect =
+            seatBoard.getBoundingClientRect();
     
-        console.log(
-            "ドラッグ終了:",
-            draggedPlayer
-        );
+        const x =
+            event.clientX - rect.left;
+    
+        const y =
+            event.clientY - rect.top;
     
     
-        // 元の座席位置に戻す
+        // ====================
+        // 一番近い座席を探す
+        // ====================
+    
+        let targetSeat = null;
+        let minDistance = Infinity;
+    
+        const seats =
+            seatBoard.querySelectorAll(".seat");
+    
+        seats.forEach(seat => {
+    
+            // 自分自身は除外
+            if (seat === draggedElement) {
+                return;
+            }
+    
+            const seatRect =
+                seat.getBoundingClientRect();
+    
+            const centerX =
+                seatRect.left +
+                seatRect.width / 2 -
+                rect.left;
+    
+            const centerY =
+                seatRect.top +
+                seatRect.height / 2 -
+                rect.top;
+    
+            const dx = x - centerX;
+            const dy = y - centerY;
+    
+            const distance =
+                Math.sqrt(dx * dx + dy * dy);
+    
+            if (distance < minDistance) {
+    
+                minDistance = distance;
+                targetSeat = seat;
+            }
+        });
+    
+    
+        // ====================
+        // 入れ替え処理
+        // ====================
+    
+        if (targetSeat) {
+    
+            const targetPlayerId =
+                targetSeat.dataset.playerId;
+    
+            const players =
+                gameCore.getState().players;
+    
+            const playerA =
+                players.find(
+                    p => p.id === draggedPlayer
+                );
+    
+            const playerB =
+                players.find(
+                    p => p.id === targetPlayerId
+                );
+    
+            if (playerA && playerB) {
+    
+                const temp =
+                    playerA.seat;
+    
+                playerA.seat =
+                    playerB.seat;
+    
+                playerB.seat =
+                    temp;
+            }
+        }
+    
+    
+        // ====================
+        // 画面を更新
+        // ====================
+    
         draggedElement.style.left = "";
         draggedElement.style.top = "";
-    
     
         draggedElement.classList.remove(
             "dragging"
         );
     
-    
         draggedPlayer = null;
         draggedElement = null;
+        draggedStartSeat = null;
     
+        updatePreparingScreen();
     });
