@@ -181,3 +181,36 @@ document.getElementById("returnButton").onclick = () => {
 
     showScreen(screens.gameSelect);
 };
+
+//ドラッグ処理
+    let draggedPlayer = null;
+    // 座席を押した
+    seatBoard.addEventListener("pointerdown", event => {
+    
+        const seat = event.target.closest(".seat");
+    
+        if (!seat) {
+            return;
+        }
+    
+        draggedPlayer =
+            seat.dataset.playerId;
+    
+        seat.setPointerCapture(event.pointerId);
+    
+    });
+    //指を離した
+    seatBoard.addEventListener("pointerup", event => {
+    
+        if (!draggedPlayer) {
+            return;
+        }
+    
+        console.log(
+            "ドラッグ終了:",
+            draggedPlayer
+        );
+    
+        draggedPlayer = null;
+    
+    });
