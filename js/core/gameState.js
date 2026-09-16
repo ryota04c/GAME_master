@@ -6,7 +6,16 @@ export const gameState = {
     game: {
         name: "",
         round: 0,
-        maxRounds: Infinity
+        maxRounds: Infinity,
+        modules: {
+            turn: false,
+            timer: false,
+            score: false,
+            random: false,
+            private: false,
+            round: false,
+            transition: false
+        }
     },
 
     // プレイヤー
