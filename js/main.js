@@ -122,19 +122,23 @@ function updatePreparingScreen() {
     // ====================
     // 座席
     // ====================
-
+    
     seatBoard.innerHTML = "";
-
+    
     state.players.forEach(player => {
-
-        const element = document.createElement("div");
-
+    
+        const element =
+            document.createElement("div");
+    
         element.className =
             `seat seat-${player.seat}`;
-
+    
         element.textContent =
             player.name || player.id;
-
+    
+        // ドラッグ対象
+        element.dataset.playerId = player.id;
+    
         seatBoard.appendChild(element);
 
     });
