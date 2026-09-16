@@ -118,42 +118,174 @@
             <h1>MODULE SETTING</h1>
         
             <div id="moduleSetting">
-        
-                <label>
-                    <input type="checkbox" id="moduleTurn">
-                    TURN
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="moduleTimer">
-                    TIMER
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="moduleScore">
-                    SCORE
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="moduleRandom">
-                    RANDOM
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="modulePrivate">
-                    PRIVATE
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="moduleRound">
-                    ROUND
-                </label>
-        
-                <label>
-                    <input type="checkbox" id="moduleTransition">
-                    TRANSITION
-                </label>
-        
+            
+                <!-- TURN -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleTurn">
+                        TURN
+                    </label>
+            
+                    <div id="turnSettings" class="moduleDetails hidden">
+            
+                        <label>
+                            Start Player
+                            <select id="turnStartPlayer">
+                                <option value="random">Random</option>
+                                <option value="p1">P1</option>
+                                <option value="p2">P2</option>
+                                <option value="p3">P3</option>
+                                <option value="p4">P4</option>
+                                <option value="p5">P5</option>
+                            </select>
+                        </label>
+            
+                        <label>
+                            Direction
+                            <select id="turnDirection">
+                                <option value="clockwise">
+                                    Clockwise
+                                </option>
+            
+                                <option value="counterclockwise">
+                                    Counterclockwise
+                                </option>
+            
+                                <option value="reversible">
+                                    Reversible
+                                </option>
+                            </select>
+                        </label>
+            
+                        <label>
+                            Clear Detection
+                            <input
+                                type="checkbox"
+                                id="turnClear"
+                            >
+                        </label>
+            
+                        <label>
+                            Elimination
+                            <input
+                                type="checkbox"
+                                id="turnElimination"
+                            >
+                        </label>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!-- TIMER -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleTimer">
+                        TIMER
+                    </label>
+            
+                    <div
+                        id="timerSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
+            
+                <!-- SCORE -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleScore">
+                        SCORE
+                    </label>
+            
+                    <div
+                        id="scoreSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
+            
+                <!-- RANDOM -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleRandom">
+                        RANDOM
+                    </label>
+            
+                    <div
+                        id="randomSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
+            
+                <!-- PRIVATE -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="modulePrivate">
+                        PRIVATE
+                    </label>
+            
+                    <div
+                        id="privateSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
+            
+                <!-- ROUND -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleRound">
+                        ROUND
+                    </label>
+            
+                    <div
+                        id="roundSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
+            
+                <!-- TRANSITION -->
+                <div class="module">
+            
+                    <label class="moduleHeader">
+                        <input type="checkbox" id="moduleTransition">
+                        TRANSITION
+                    </label>
+            
+                    <div
+                        id="transitionSettings"
+                        class="moduleDetails hidden"
+                    >
+                        <!-- 後で追加 -->
+                    </div>
+            
+                </div>
+            
             </div>
         
             <button id="toPreparingButton">
