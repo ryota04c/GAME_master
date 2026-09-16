@@ -176,3 +176,26 @@ button {
     left: 50%;
     top: 10%;
 }
+
+#seatChange {
+    text-align: center;
+}
+
+#seatChange h2 {
+    margin-bottom: 15px;
+}
+
+#seatChange select {
+    margin: 5px 10px;
+    padding: 8px;
+
+    font-size: 1rem;
+}
+
+#seatChangeButton {
+    margin-top: 10px;
+
+    padding: 10px 25px;
+
+    font-size: 1rem;
+}
