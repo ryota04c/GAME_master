@@ -229,12 +229,7 @@ document.getElementById("returnButton").onclick = () => {
         if (!draggedElement) {
             return;
         }
-        
-        // ドラッグ中の自分自身は候補から除外
-        if (seat === draggedElement) {
-            return;
-        }
-        
+    
         const rect =
             seatBoard.getBoundingClientRect();
     
@@ -244,7 +239,11 @@ document.getElementById("returnButton").onclick = () => {
         const y =
             event.clientY - rect.top;
     
+    
+        // ====================
         // ドラッグ中のプレイヤーを移動
+        // ====================
+    
         draggedElement.style.left =
             `${x}px`;
     
@@ -253,7 +252,7 @@ document.getElementById("returnButton").onclick = () => {
     
     
         // ====================
-        // 座席を探す
+        // 一番近い座席を探す
         // ====================
     
         let nearestSeat = null;
@@ -263,6 +262,11 @@ document.getElementById("returnButton").onclick = () => {
             seatBoard.querySelectorAll(".seat");
     
         seats.forEach(seat => {
+    
+            // ドラッグしている自分自身は除外
+            if (seat === draggedElement) {
+                return;
+            }
     
             const seatRect =
                 seat.getBoundingClientRect();
@@ -277,11 +281,17 @@ document.getElementById("returnButton").onclick = () => {
                 seatRect.height / 2 -
                 rect.top;
     
-            const dx = x - centerX;
-            const dy = y - centerY;
+            const dx =
+                x - centerX;
+    
+            const dy =
+                y - centerY;
     
             const distance =
-                Math.sqrt(dx * dx + dy * dy);
+                Math.sqrt(
+                    dx * dx + dy * dy
+                );
+    
     
             if (distance < minDistance) {
     
@@ -309,7 +319,10 @@ document.getElementById("returnButton").onclick = () => {
     
         const dropDistance = 100;
     
-        if (minDistance <= dropDistance) {
+        if (
+            nearestSeat &&
+            minDistance <= dropDistance
+        ) {
     
             dropTarget = nearestSeat;
     
