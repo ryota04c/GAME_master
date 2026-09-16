@@ -18,6 +18,8 @@ const preparingPlayers =
     document.getElementById("preparingPlayers");
 const seatBoard =
     document.getElementById("seatBoard");
+const preparingModuleList =
+    document.getElementById("preparingModuleList");
 const moduleInputs = {
     turn: document.getElementById("moduleTurn"),
     timer: document.getElementById("moduleTimer"),
@@ -147,6 +149,28 @@ function updatePreparingScreen() {
 
     });
 
+    // ====================
+    // モジュール表示
+    // ====================
+
+    preparingModuleList.innerHTML = "";
+
+    Object.entries(state.game.modules)
+        .forEach(([moduleName, enabled]) => {
+
+            const element =
+                document.createElement("div");
+
+            element.className =
+                "preparingModule";
+
+            element.textContent =
+                `${moduleName.toUpperCase()} : ${
+                    enabled ? "ON" : "OFF"
+                }`;
+
+            preparingModuleList.appendChild(element);
+        });
 
     // ====================
     // 座席
