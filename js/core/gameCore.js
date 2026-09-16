@@ -31,7 +31,16 @@ export const gameCore = {
     
         gameState.currentPlayer = null;
     },
-
+    //ゲーム開始
+    startGame() {
+    
+        gameState.state = "round";
+    
+        gameState.game.round = 1;
+    
+        emit("GAME_START");
+        emit("ROUND_START");
+    },
 
     // ゲームを終了
     endGame() {
