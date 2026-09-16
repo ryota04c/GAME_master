@@ -176,26 +176,14 @@ button {
     left: 50%;
     top: 10%;
 }
+.seat.dragging {
+    z-index: 100;
 
-#seatChange {
-    text-align: center;
-}
+    transform:
+        translate(-50%, -50%)
+        scale(1.1);
 
-#seatChange h2 {
-    margin-bottom: 15px;
-}
+    opacity: 0.8;
 
-#seatChange select {
-    margin: 5px 10px;
-    padding: 8px;
-
-    font-size: 1rem;
-}
-
-#seatChangeButton {
-    margin-top: 10px;
-
-    padding: 10px 25px;
-
-    font-size: 1rem;
+    pointer-events: none;
 }
