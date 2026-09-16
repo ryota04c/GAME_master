@@ -115,6 +115,26 @@ button {
 
     font-size: 1.2rem;
 }
+#preparingModules {
+    width: min(600px, 90vw);
+}
+
+#preparingModules h2 {
+    margin-bottom: 15px;
+}
+
+#preparingModuleList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.preparingModule {
+    padding: 10px 15px;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
 
 #seatPreview {
     width: min(700px, 90vw);
