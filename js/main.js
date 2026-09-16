@@ -18,6 +18,15 @@ const preparingPlayers =
     document.getElementById("preparingPlayers");
 const seatBoard =
     document.getElementById("seatBoard");
+const moduleInputs = {
+    turn: document.getElementById("moduleTurn"),
+    timer: document.getElementById("moduleTimer"),
+    score: document.getElementById("moduleScore"),
+    random: document.getElementById("moduleRandom"),
+    private: document.getElementById("modulePrivate"),
+    round: document.getElementById("moduleRound"),
+    transition: document.getElementById("moduleTransition")
+};
 
 
 // ====================
@@ -76,17 +85,37 @@ playerCount.onchange = () => {
 
 document.getElementById("toPreparingButton").onclick = () => {
 
-    const players = gameCore.getState().players;
+    const state = gameCore.getState();
 
-    players.forEach((player, index) => {
+
+    // ====================
+    // プレイヤー名を保存
+    // ====================
+
+    state.players.forEach((player, index) => {
 
         const input = document.getElementById(
             `playerName${index + 1}`
         );
 
         player.name = input.value;
-
     });
+
+
+    // ====================
+    // モジュール設定を保存
+    // ====================
+
+    Object.keys(moduleInputs).forEach(moduleName => {
+
+        state.game.modules[moduleName] =
+            moduleInputs[moduleName].checked;
+    });
+
+
+    // ====================
+    // PREPARING画面へ
+    // ====================
 
     updatePreparingScreen();
 
