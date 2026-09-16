@@ -184,33 +184,98 @@ document.getElementById("returnButton").onclick = () => {
 
 //ドラッグ処理
     let draggedPlayer = null;
-    // 座席を押した
+    let draggedElement = null;
+    
+    
+    // ====================
+    // ドラッグ開始
+    // ====================
+    
     seatBoard.addEventListener("pointerdown", event => {
     
-        const seat = event.target.closest(".seat");
+        const seat =
+            event.target.closest(".seat");
     
         if (!seat) {
             return;
         }
     
+    
         draggedPlayer =
             seat.dataset.playerId;
     
+        draggedElement = seat;
+    
+    
+        // ドラッグ中の見た目
+        seat.classList.add("dragging");
+    
+    
+        // タッチ操作で画面がスクロールしないようにする
         seat.setPointerCapture(event.pointerId);
     
     });
-    //指を離した
-    seatBoard.addEventListener("pointerup", event => {
     
-        if (!draggedPlayer) {
+    
+    // ====================
+    // ドラッグ中
+    // ====================
+    
+    seatBoard.addEventListener("pointermove", event => {
+    
+        if (!draggedElement) {
             return;
         }
+    
+    
+        const rect =
+            seatBoard.getBoundingClientRect();
+    
+    
+        const x =
+            event.clientX - rect.left;
+    
+        const y =
+            event.clientY - rect.top;
+    
+    
+        draggedElement.style.left =
+            `${x}px`;
+    
+        draggedElement.style.top =
+            `${y}px`;
+    
+    });
+    
+    
+    // ====================
+    // ドラッグ終了
+    // ====================
+    
+    seatBoard.addEventListener("pointerup", event => {
+    
+        if (!draggedElement) {
+            return;
+        }
+    
     
         console.log(
             "ドラッグ終了:",
             draggedPlayer
         );
     
+    
+        // 元の座席位置に戻す
+        draggedElement.style.left = "";
+        draggedElement.style.top = "";
+    
+    
+        draggedElement.classList.remove(
+            "dragging"
+        );
+    
+    
         draggedPlayer = null;
+        draggedElement = null;
     
     });
