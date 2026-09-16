@@ -30,6 +30,15 @@ const moduleInputs = {
     round: document.getElementById("moduleRound"),
     transition: document.getElementById("moduleTransition")
 };
+const moduleDetails = {
+    turn: document.getElementById("turnSettings"),
+    timer: document.getElementById("timerSettings"),
+    score: document.getElementById("scoreSettings"),
+    random: document.getElementById("randomSettings"),
+    private: document.getElementById("privateSettings"),
+    round: document.getElementById("roundSettings"),
+    transition: document.getElementById("transitionSettings")
+};
 
 
 // ====================
@@ -55,6 +64,15 @@ document.getElementById("newGameButton").onclick = () => {
     gameCore.initialize(
         Number(playerCount.value)
     );
+
+    // モジュール設定をリセット
+    Object.keys(moduleInputs).forEach(moduleName => {
+
+        moduleInputs[moduleName].checked = false;
+
+        moduleDetails[moduleName]
+            .classList.add("hidden");
+    });
 
     updatePlayerInputs();
 
@@ -113,6 +131,28 @@ document.getElementById("toModuleSettingButton").onclick = () => {
         screens.moduleSetting
     );
 };
+
+// ====================
+// MODULE SETTING内処理
+// ====================
+Object.keys(moduleInputs).forEach(moduleName => {
+
+    moduleInputs[moduleName].addEventListener(
+        "change",
+        () => {
+
+            const enabled =
+                moduleInputs[moduleName].checked;
+
+            moduleDetails[moduleName]
+                .classList.toggle(
+                    "hidden",
+                    !enabled
+                );
+        }
+    );
+
+});
 // ====================
 // SETTING → PREPARING
 // ====================
