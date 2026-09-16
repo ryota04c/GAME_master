@@ -99,3 +99,80 @@ button {
     border: none;
     border-radius: 6px;
 }
+
+#preparingPlayers {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.preparingPlayer {
+    padding: 10px 20px;
+
+    border: 1px solid white;
+    border-radius: 8px;
+
+    font-size: 1.2rem;
+}
+
+#seatPreview {
+    width: min(700px, 90vw);
+}
+
+#seatPreview h2 {
+    text-align: center;
+}
+
+#seatBoard {
+    position: relative;
+
+    width: 100%;
+    height: 400px;
+
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.seat {
+    position: absolute;
+
+    width: 120px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid white;
+    border-radius: 10px;
+
+    background: #222;
+
+    transform: translate(-50%, -50%);
+}
+
+.seat-0 {
+    left: 10%;
+    top: 10%;
+}
+
+.seat-1 {
+    left: 90%;
+    top: 10%;
+}
+
+.seat-2 {
+    left: 90%;
+    top: 90%;
+}
+
+.seat-3 {
+    left: 10%;
+    top: 90%;
+}
+
+.seat-4 {
+    left: 50%;
+    top: 10%;
+}
