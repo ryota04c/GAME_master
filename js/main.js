@@ -14,6 +14,10 @@ const screens = {
 };
 const playerCount = document.getElementById("playerCount");
 const playerInputs = document.querySelectorAll(".playerInput");
+const preparingPlayers =
+    document.getElementById("preparingPlayers");
+const seatBoard =
+    document.getElementById("seatBoard");
 
 
 // ====================
@@ -84,10 +88,57 @@ document.getElementById("toPreparingButton").onclick = () => {
 
     });
 
-    console.log(gameCore.getState());
+    updatePreparingScreen();
 
     showScreen(screens.preparing);
 };
+
+
+//preparing生成
+function updatePreparingScreen() {
+
+    const state = gameCore.getState();
+
+    // ====================
+    // プレイヤー一覧
+    // ====================
+
+    preparingPlayers.innerHTML = "";
+
+    state.players.forEach(player => {
+
+        const element = document.createElement("div");
+
+        element.className = "preparingPlayer";
+
+        element.textContent =
+            `${player.id} : ${player.name || "名前未入力"}`;
+
+        preparingPlayers.appendChild(element);
+
+    });
+
+
+    // ====================
+    // 座席
+    // ====================
+
+    seatBoard.innerHTML = "";
+
+    state.players.forEach(player => {
+
+        const element = document.createElement("div");
+
+        element.className =
+            `seat seat-${player.seat}`;
+
+        element.textContent =
+            player.name || player.id;
+
+        seatBoard.appendChild(element);
+
+    });
+}
 
 
 // ====================
