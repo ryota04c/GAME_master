@@ -187,3 +187,10 @@ button {
 
     pointer-events: none;
 }
+.seat.drop-target {
+    border: 3px solid #00aaff;
+    box-shadow: 0 0 20px #00aaff;
+    transform:
+        translate(-50%, -50%)
+        scale(1.1);
+}
