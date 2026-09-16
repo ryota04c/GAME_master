@@ -248,7 +248,7 @@ document.getElementById("returnButton").onclick = () => {
     
     
         // ====================
-        // 一番近い座席を探す
+        // 座席を探す
         // ====================
     
         let nearestSeat = null;
@@ -258,11 +258,6 @@ document.getElementById("returnButton").onclick = () => {
             seatBoard.querySelectorAll(".seat");
     
         seats.forEach(seat => {
-    
-            // 自分自身は除外
-            if (seat === draggedElement) {
-                return;
-            }
     
             const seatRect =
                 seat.getBoundingClientRect();
@@ -304,16 +299,22 @@ document.getElementById("returnButton").onclick = () => {
     
     
         // ====================
-        // 新しい候補を強調
+        // 一定距離以内なら候補
         // ====================
     
-        dropTarget = nearestSeat;
+        const dropDistance = 100;
     
-        if (dropTarget) {
+        if (minDistance <= dropDistance) {
+    
+            dropTarget = nearestSeat;
     
             dropTarget.classList.add(
                 "drop-target"
             );
+    
+        } else {
+    
+            dropTarget = null;
         }
     });
         
@@ -328,14 +329,21 @@ document.getElementById("returnButton").onclick = () => {
             return;
         }
     
+        // ====================
+        // 入れ替え先
+        // ====================
+    
         const targetSeat = dropTarget;
     
     
         // ====================
-        // 入れ替え処理
+        // 自分自身なら何もしない
         // ====================
     
-        if (targetSeat) {
+        if (
+            targetSeat &&
+            targetSeat !== draggedElement
+        ) {
     
             const targetPlayerId =
                 targetSeat.dataset.playerId;
@@ -397,7 +405,7 @@ document.getElementById("returnButton").onclick = () => {
     
     
         // ====================
-        // 画面を更新
+        // 画面更新
         // ====================
     
         updatePreparingScreen();
