@@ -186,6 +186,7 @@ document.getElementById("returnButton").onclick = () => {
     let draggedPlayer = null;
     let draggedElement = null;
     let draggedStartSeat = null;
+    let dropTarget = null;
     
     // ====================
     // ドラッグ開始
@@ -238,39 +239,19 @@ document.getElementById("returnButton").onclick = () => {
         const y =
             event.clientY - rect.top;
     
+        // ドラッグ中のプレイヤーを移動
         draggedElement.style.left =
             `${x}px`;
     
         draggedElement.style.top =
             `${y}px`;
-    });
-    
-    
-    // ====================
-    // ドラッグ終了
-    // ====================
-    
-    seatBoard.addEventListener("pointerup", event => {
-    
-        if (!draggedElement) {
-            return;
-        }
-    
-        const rect =
-            seatBoard.getBoundingClientRect();
-    
-        const x =
-            event.clientX - rect.left;
-    
-        const y =
-            event.clientY - rect.top;
     
     
         // ====================
         // 一番近い座席を探す
         // ====================
     
-        let targetSeat = null;
+        let nearestSeat = null;
         let minDistance = Infinity;
     
         const seats =
@@ -305,9 +286,49 @@ document.getElementById("returnButton").onclick = () => {
             if (distance < minDistance) {
     
                 minDistance = distance;
-                targetSeat = seat;
+                nearestSeat = seat;
             }
         });
+    
+    
+        // ====================
+        // 前の候補を解除
+        // ====================
+    
+        if (dropTarget) {
+    
+            dropTarget.classList.remove(
+                "drop-target"
+            );
+        }
+    
+    
+        // ====================
+        // 新しい候補を強調
+        // ====================
+    
+        dropTarget = nearestSeat;
+    
+        if (dropTarget) {
+    
+            dropTarget.classList.add(
+                "drop-target"
+            );
+        }
+    });
+        
+    
+    // ====================
+    // ドラッグ終了
+    // ====================
+    
+    seatBoard.addEventListener("pointerup", event => {
+    
+        if (!draggedElement) {
+            return;
+        }
+    
+        const targetSeat = dropTarget;
     
     
         // ====================
@@ -347,8 +368,15 @@ document.getElementById("returnButton").onclick = () => {
     
     
         // ====================
-        // 画面を更新
+        // 表示をリセット
         // ====================
+    
+        if (dropTarget) {
+    
+            dropTarget.classList.remove(
+                "drop-target"
+            );
+        }
     
         draggedElement.style.left = "";
         draggedElement.style.top = "";
@@ -357,9 +385,20 @@ document.getElementById("returnButton").onclick = () => {
             "dragging"
         );
     
+    
+        // ====================
+        // 状態をリセット
+        // ====================
+    
         draggedPlayer = null;
         draggedElement = null;
         draggedStartSeat = null;
+        dropTarget = null;
+    
+    
+        // ====================
+        // 画面を更新
+        // ====================
     
         updatePreparingScreen();
     });
