@@ -229,7 +229,12 @@ document.getElementById("returnButton").onclick = () => {
         if (!draggedElement) {
             return;
         }
-    
+        
+        // ドラッグ中の自分自身は候補から除外
+        if (seat === draggedElement) {
+            return;
+        }
+        
         const rect =
             seatBoard.getBoundingClientRect();
     
