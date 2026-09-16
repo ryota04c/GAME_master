@@ -8,6 +8,7 @@ import { gameCore } from "./core/gameCore.js";
 const screens = {
     gameSelect: document.getElementById("gameSelectScreen"),
     setting: document.getElementById("settingScreen"),
+    moduleSetting:document.getElementById("moduleSettingScreen"),
     preparing: document.getElementById("preparingScreen"),
     round: document.getElementById("roundScreen"),
     gameEnd: document.getElementById("gameEndScreen")
@@ -82,10 +83,9 @@ playerCount.onchange = () => {
 };
 
 // ====================
-// SETTING → PREPARING
+// SETTING → mod setting
 // ====================
-
-document.getElementById("toPreparingButton").onclick = () => {
+document.getElementById("toModuleSettingButton").onclick = () => {
 
     const state = gameCore.getState();
 
@@ -96,12 +96,29 @@ document.getElementById("toPreparingButton").onclick = () => {
 
     state.players.forEach((player, index) => {
 
-        const input = document.getElementById(
-            `playerName${index + 1}`
-        );
+        const input =
+            document.getElementById(
+                `playerName${index + 1}`
+            );
 
         player.name = input.value;
     });
+
+
+    // ====================
+    // MODULE SETTINGへ
+    // ====================
+
+    showScreen(
+        screens.moduleSetting
+    );
+};
+// ====================
+// SETTING → PREPARING
+// ====================
+document.getElementById("toPreparingButton").onclick = () => {
+
+    const state = gameCore.getState();
 
 
     // ====================
@@ -116,12 +133,14 @@ document.getElementById("toPreparingButton").onclick = () => {
 
 
     // ====================
-    // PREPARING画面へ
+    // PLAYER PREPARING
     // ====================
 
     updatePreparingScreen();
 
-    showScreen(screens.preparing);
+    showScreen(
+        screens.preparing
+    );
 };
 
 
